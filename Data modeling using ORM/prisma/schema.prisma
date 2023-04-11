@@ -7,8 +7,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model RatingSystem {
+  id   String  @id @default(uuid())
+  name String?
+  min  Int     @default(1)
+  max  Int     @default(5)
+
+  cources Course[]
+}
+
+model Course {
+  id             String       @id @default(uuid())
+  name           String
+  ratingSystem   RatingSystem @relation(fields: [ratingSystemId], references: [id])
+  ratingSystemId String
+
+  students Student[]
+  groups   Group[]
+
+  days StudentDay[]
+}
+
+model Student {
+  id         String  @id @default(uuid())
+  firstName  String
+  lastName   String
+  middleName String?
+
+  birthDay DateTime
+
+  phoneNumber String?
+  email       String?
+
+  soloCources Course[]
+  groups      Group[]
+
+  studentDay StudentDay[]
+}
+
+model Group {
+  id   String @id @default(uuid())
+  name String
+
+  students Student[]
+  cources  Course[]
+}
+
+model StudentDay {
+  id   String   @id @default(uuid())
+  date DateTime @default(now())
+
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId String
+
+  cource   Course @relation(fields: [courceId], references: [id])
+  courceId String
+
+  isVisited Boolean @default(true)
+  grade     Int?
 }
