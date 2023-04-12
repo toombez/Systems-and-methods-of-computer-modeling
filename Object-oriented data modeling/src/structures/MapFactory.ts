@@ -8,33 +8,49 @@ import {
 /**
  * Factory for map elements
  */
-abstract class MapFactory {
+class MapFactory {
     /**
      * Create `point` map element
      * @param point element position
      */
-    public abstract createPointElement(
-        point: MapPoint,
-        ...args: unknown[]
-    ): MapPointElement
+    public createPointElement(point: MapPoint): MapPointElement {
+        return {
+            point,
+            meta: { elementType: 'POINT' }
+        }
+    }
 
     /**
      * Create `line` map element
      * @param points line points
      */
-    public abstract createLineElement(
-        points: MapPoint[],
-        ...args: unknown[]
-    ): MapLineElement
+    public createLineElement(points: MapPoint[]): MapLineElement {
+        return {
+            points,
+            meta: { elementType: 'LINE' }
+        }
+    }
 
     /**
      * Create polygone map element
-     * @param points polygone points
+     * @param points polygone points. First and last points will be connected
+     *
+     * @example
+     * // Creating polygone by three points
+     * const factory = new MapFactory()
+     *
+     * factory.createPolygoneElement([
+     *     ['1.292', '2.2'],
+     *     ['1.46', '2.4'],
+     *     ['1.47', '2.76'],
+     * ])
      */
-    public abstract createPolygoneElement(
-        points: MapPoint,
-        ...args: unknown[]
-    ): MapPolygoneElement
+    public createPolygoneElement(points: MapPoint[]): MapPolygoneElement {
+        return {
+            points,
+            meta: { elementType: 'POLYGONE' }
+        }
+    }
 }
 
 export default MapFactory

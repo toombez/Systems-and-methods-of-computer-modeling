@@ -21,18 +21,19 @@ type MapPointObject = {
  */
 export type MapPoint = MapPointObject | MapPointArray
 
+export interface MapElementMeta {
+    elementType: MapElementType
+}
+
 /**
  * Interface for abstract map element
  */
 export interface MapElement {
-    /**
-     * Map element type
-     */
-    type: MapElementType
+    meta: MapElementMeta
 }
 
 /**
- * Interface for map point element
+ * Interface for map `point` element
  */
 export interface MapPointElement extends MapElement {
     /**
@@ -42,7 +43,7 @@ export interface MapPointElement extends MapElement {
 }
 
 /**
- * Interface for map line element
+ * Interface for map `line` element
  */
 export interface MapLineElement extends MapElement {
     /**
@@ -52,7 +53,7 @@ export interface MapLineElement extends MapElement {
 }
 
 /**
- * Interface for map polygone element
+ * Interface for map `polygone` element
  */
 export interface MapPolygoneElement extends MapElement {
     /**
