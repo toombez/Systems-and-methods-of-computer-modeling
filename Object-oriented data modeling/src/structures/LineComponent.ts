@@ -1,9 +1,12 @@
+import { ShapeComponent, ShapeComponentType } from '../types'
 import Point from './Point'
 
 /**
  * Class for represent `line` abstraction
  */
-class LineComponent {
+class LineComponent implements ShapeComponent {
+    shapeType: ShapeComponentType = 'LINE'
+
     public constructor(
         public readonly points: Point[]
     ) {}
@@ -31,17 +34,6 @@ class LineComponent {
      */
     public get middlePoint(): number {
         return this.GetMiddlePoint(false)
-    }
-
-    /**
-     * Check is `LineComponent`
-     * @param component component to check
-     * @returns is component `LineComponent`
-     */
-    public static isLineComponent(
-        component: unknown
-    ): component is LineComponent {
-        return component instanceof LineComponent
     }
 }
 

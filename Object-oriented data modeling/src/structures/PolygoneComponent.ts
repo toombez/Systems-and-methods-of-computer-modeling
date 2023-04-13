@@ -1,9 +1,12 @@
+import { ShapeComponent, ShapeComponentType } from '../types'
 import Point from './Point'
 
 /**
  * Class for representing `polygone` abstraction
  */
-class PolygoneComponent {
+class PolygoneComponent implements ShapeComponent {
+    shapeType: ShapeComponentType = 'POLYGONE'
+
     public constructor(
         public readonly points: Point[]
     ) {}
@@ -11,7 +14,7 @@ class PolygoneComponent {
     /**
      * `Polygone` centroid point
      */
-    private get centroid() {
+    public get centroid() {
         const pointsCount = this.points.length
 
         const summaryVector = this.points.reduce((vector, point) => {
@@ -22,17 +25,6 @@ class PolygoneComponent {
         const y = summaryVector.y / pointsCount
 
         return new Point(x, y)
-    }
-
-    /**
-     * Check is `PolygoneComponent`
-     * @param component component to check
-     * @returns is component `PolygoneComponent`
-     */
-    public static isPolygoneComponent(
-        component: unknown
-    ): component is PolygoneComponent {
-        return component instanceof PolygoneComponent
     }
 }
 

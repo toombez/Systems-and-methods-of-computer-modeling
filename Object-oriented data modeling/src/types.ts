@@ -61,3 +61,9 @@
 //      */
 //     points: MapPoint[]
 // }
+
+export type ShapeComponentType = 'POINT' | 'LINE' | 'POLYGONE'
+
+export interface ShapeComponent {
+    readonly shapeType: ShapeComponentType
+}
