@@ -67,3 +67,9 @@ export type ShapeComponentType = 'POINT' | 'LINE' | 'POLYGONE'
 export interface ShapeComponent {
     readonly shapeType: ShapeComponentType
 }
+
+export type SurfaceComponentType = 'FOREST' | 'LAKE' | 'RIVER' | 'RAVINE'
+
+export interface SurfaceComponent {
+    readonly surfaceType: SurfaceComponentType
+}
