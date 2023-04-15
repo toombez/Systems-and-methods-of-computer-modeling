@@ -1,8 +1,24 @@
-import Composite from './structures/Composite'
+import Folder from './structures/Folder'
 
-export interface CompositeComponent {
+export interface FSComponent {
+    /**
+     * FS element name
+     */
     name: string
-    referenceToParent?: Composite
-    method(): void
+
+    /**
+     * Parent folder
+     */
+    parentFolder?: Folder
+
+    /**
+     * Detach FS element from folder
+     */
     detach(): void
+
+    /**
+     * Dir cli command
+     * @param indent display intent
+     */
+    dir(indent: string): void
 }
