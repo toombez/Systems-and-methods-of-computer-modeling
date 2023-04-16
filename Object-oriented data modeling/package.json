@@ -2,8 +2,15 @@
   "name": "object-oriented-data-modeling",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon ./src/index.ts"
+  },
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.0.4"
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4",
+    "@types/node": "^18.15.11"
   }
 }
