@@ -1,4 +1,5 @@
 import Folder from './Folder'
+import ImageFile from './ImageFile'
 import TextFile from './TextFile'
 
 class OS {
@@ -12,7 +13,8 @@ class OS {
 
         const file1 = new TextFile('f1', 'lorem3')
         const file2 = new TextFile('f2', 'lorem2')
-        const file3 = new TextFile('f3', 'lorem1')
+        const file3 = new TextFile('f3.txt', 'lorem1')
+        const image1 = new ImageFile('image.png', 'lorem1')
 
         this.fs.attach(varFolder)
         this.fs.attach(etcFolder)
@@ -22,6 +24,7 @@ class OS {
         etcFolder.attach(file1)
         rootUserFolder.attach(file2)
         rootUserFolder.attach(file3)
+        rootUserFolder.attach(image1)
 
         console.log('Input command:')
 
