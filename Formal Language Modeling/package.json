@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup src/index.ts",
+    "build:watch": "yarn run build --watch",
     "dev": "nodemon src/index.ts"
   },
   "devDependencies": {
