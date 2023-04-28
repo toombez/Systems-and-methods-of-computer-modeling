@@ -8,7 +8,10 @@ class State extends Map<string, Transition> {
      * Create state of turing machine
      * @param transitions state transitions
      */
-    public constructor(transitions: Transition[]) {
+    public constructor(
+        public readonly name: string,
+        ...transitions: Transition[]
+    ) {
         super(transitions.map((transition) => {
             return [transition.symbol, transition]
         }))

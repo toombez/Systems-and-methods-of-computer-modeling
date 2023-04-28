@@ -11,24 +11,24 @@ const tm = new TuringMachine(
     Tape.fromString('0101_1110_0101'),
     new Alphabet(['0', '1', '_']),
     [
-        new State([
+        new State(
+            'Q1',
             new Transition('0', [
                 factory.createWriteTransition('1'),
-                factory.createMoveTransition('RIGHT')
+                factory.createRightMoveTransition()
             ]),
             new Transition('1', [
                 factory.createWriteTransition('0'),
-                factory.createMoveTransition('RIGHT')
+                factory.createRightMoveTransition()
             ]),
             new Transition('_', [
-                factory.createMoveTransition('RIGHT')
-            ])
-        ])
+                factory.createRightMoveTransition()
+        ]))
     ]
 )
 
-console.log(tm.tape, tm.head)
+console.log(tm.tape.join(''))
 
 const result = tm.run()
 
-console.log(result, tm.head)
+console.log(result.join(''))
