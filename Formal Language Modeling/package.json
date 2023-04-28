@@ -2,10 +2,12 @@
   "name": "formal-language-modeling",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
+  "exports": "./dist/index.js",
   "scripts": {
     "build": "tsup src/index.ts",
     "build:watch": "yarn run build --watch",
-    "dev": "nodemon src/index.ts"
+    "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.cjs\"",
   },
   "devDependencies": {
     "nodemon": "^2.0.22",
