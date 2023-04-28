@@ -8,7 +8,8 @@
     "build": "tsup src/index.ts",
     "build:watch": "yarn run build --watch",
     "dev": "tsup src/index.ts --watch --onSuccess \"node dist/index.cjs\"",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
