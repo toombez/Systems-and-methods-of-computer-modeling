@@ -44,6 +44,22 @@ class TransitionFactory {
     public createWriteTransition(symbol: string) {
         return TransitionFactory.writeTransition.bind(this, symbol)
     }
+
+    /**
+     * Create left move transition handler
+     * @returns left move transition handler
+     */
+    public createLeftMoveTransition(): TransitionHandler {
+        return TransitionFactory.moveTransition.bind(this, 'LEFT')
+    }
+
+    /**
+     * Create right move transition handler
+     * @returns right move transition handler
+     */
+    public createRightMoveTransition(): TransitionHandler {
+        return TransitionFactory.moveTransition.bind(this, 'RIGHT')
+    }
 }
 
 export default TransitionFactory
