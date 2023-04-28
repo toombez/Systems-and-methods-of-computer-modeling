@@ -6,15 +6,11 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "exclude": ["dist", "node_modules"],
-  "tsup": {
-    "dts": true,
-    "bundle": false,
-    "treeshake": true,
-    "target": "node16",
-    "format": ["esm", "cjs"],
-    "entry": ["src/**/*.ts"]
-  }
+  "exclude": ["dist", "node_modules"]
 }
