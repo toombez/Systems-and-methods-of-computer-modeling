@@ -1,14 +1,13 @@
-import Transition from '@/structures/Transition'
+import State from '@/structures/State'
 
 class TuringMachine {
     public head = 0
-
-    public currentState: Map<string, Transition>
+    public currentState: State
 
     public constructor(
         public tape: string[],
         public alphabet: Set<string>,
-        public states: Map<string, Transition>[],
+        public states: State[],
     ) {
         this.currentState = states[0]
     }
