@@ -1,9 +1,7 @@
 /**
- * Turing machine alphabet
- *
- * Contains blank symbol and all symbols from alphabet
+ * Is a finite, non-empty set of tape alphabet symbols
  */
-class Alphabet extends Set {
+class Alphabet extends Set<string> {
     /**
      * Default blank symbol for alphabet
      */
@@ -12,17 +10,17 @@ class Alphabet extends Set {
     /**
      * Private blank symbol
      */
-    private _blankSymbol: string = Alphabet.DEFAULT_BLANK_SYMBOL
+    private _blankSymbol!: string
 
     /**
-     * Create new alphabet based on `set`
+     * Create new alphabet
      *
      * @param symbols alphabet symbols
      * @param blankSymbol blank symbol
      */
     public constructor(
-        symbols: string[],
-        blankSymbol?: string
+        symbols: readonly string[],
+        blankSymbol?: string,
     ) {
         super(symbols)
 
@@ -40,13 +38,15 @@ class Alphabet extends Set {
      * Set blank symbol and remove previous from alphabet symbols
      */
     public set blankSymbol(symbol: string) {
-        if (!this.has(symbol)) {
+        const previousBlankSymbol = this.blankSymbol
+        this._blankSymbol = symbol
+
+        if (previousBlankSymbol !== symbol) {
             this.delete(this.blankSymbol)
 
             this.add(symbol)
         }
 
-        this._blankSymbol = symbol
     }
 
     /**
