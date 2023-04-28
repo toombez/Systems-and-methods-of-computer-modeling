@@ -1,24 +1,23 @@
 import TuringMachine, { Transition } from '@/structures/TuringMachine'
+import TransitionFactory from './structures/TransitionFactory'
+
+const factory = new TransitionFactory()
 
 const tape = '0101_1110_0101'.split('')
 const alphabet = new Set(['0', '1', '_'])
 const states = [
-    new Map<string, Transition>([
-        ['0', (machine) => {
-            const { tape, head } = machine
-
-            tape[head] = '1'
-            machine.head++
-        }],
-        ['1', (machine) => {
-            const { tape, head } = machine
-
-            tape[head] = '0'
-            machine.head++
-        }],
-        ['_', (machine) => {
-            machine.head++
-        }],
+    new Map<string, Transition[]>([
+        ['0', [
+            factory.createWriteTransition('1'),
+            factory.createMoveTransition('RIGHT')
+        ]],
+        ['1', [
+            factory.createWriteTransition('0'),
+            factory.createMoveTransition('RIGHT')
+        ]],
+        ['_', [
+            factory.createMoveTransition('RIGHT')
+        ]],
     ]),
 ]
 
