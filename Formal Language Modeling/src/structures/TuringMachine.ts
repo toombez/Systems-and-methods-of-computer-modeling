@@ -1,6 +1,4 @@
-import Alphabet from '@/structures/Alphabet'
-
-export type Transition = (machine: TuringMachine) => void
+import Transition from '@/structures/Transition'
 
 class TuringMachine {
     public head = 0
@@ -23,7 +21,7 @@ class TuringMachine {
                 return
             }
 
-            transition(this)
+            transition.run(this)
         })
 
         return this.tape
