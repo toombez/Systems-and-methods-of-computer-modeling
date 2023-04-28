@@ -1,4 +1,5 @@
 import State from '@/structures/State'
+import Alphabet from '@/structures/Alphabet'
 
 class TuringMachine {
     public head = 0
@@ -6,7 +7,7 @@ class TuringMachine {
 
     public constructor(
         public tape: string[],
-        public alphabet: Set<string>,
+        public alphabet: Alphabet,
         public states: State[],
     ) {
         this.currentState = states[0]
