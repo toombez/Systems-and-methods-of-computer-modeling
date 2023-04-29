@@ -1,8 +1,23 @@
-import Alphabet from '@structures/Alphabet';
+import { BINARY_ALPHABET, ENGLISH_ALPHABET, RUSSIAN_ALPHABET } from '@constants'
+import Alphabet from '@structures/Alphabet'
 
 class AlphabetFactory {
-    public createBinaryAlphabet() {
-        return new Alphabet(['0', '1'])
+    public createBinaryAlphabet(): Alphabet {
+        return new Alphabet.Builder()
+            .setSymbols(BINARY_ALPHABET)
+            .build()
+    }
+
+    public createEnglishAlphabet(): Alphabet {
+        return new Alphabet.Builder()
+            .setSymbols(ENGLISH_ALPHABET)
+            .build()
+    }
+
+    public createRussianAlphabet(): Alphabet {
+        return new Alphabet.Builder()
+            .setSymbols(RUSSIAN_ALPHABET)
+            .build()
     }
 }
 

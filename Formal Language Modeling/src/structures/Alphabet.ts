@@ -1,5 +1,6 @@
 import { DEFAULT_BLANK_SYMBOL } from '@constants'
 import AlphabetBuilder from '@builders/AlphabetBuilder'
+import AlphabetFactory from '@factories/AlphabetFactory'
 
 /**
  * Is a finite, non-empty set of tape alphabet symbols
@@ -9,6 +10,11 @@ class Alphabet extends Set<string> {
      * Alphabet builder
      */
     public static readonly Builder = AlphabetBuilder
+
+    /**
+     * Alphabet factory
+     */
+    public static readonly Factory = AlphabetFactory
 
     /**
      * Default alphabet blank symbol
