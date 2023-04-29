@@ -15,7 +15,8 @@
       "@mediators/*": ["mediators/*"],
       "@factories/*": ["factories/*"],
       "@/*": ["*"],
-      "@types": ["types.ts"]
+      "@types": ["types.ts"],
+      "@constants": ["constants.ts"]
     }
   },
   "exclude": ["dist", "node_modules"]

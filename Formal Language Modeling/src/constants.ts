@@ -1,4 +1,9 @@
 /**
+ * Default alphabet blank symbol
+ */
+export const DEFAULT_BLANK_SYMBOL = '_' as const
+
+/**
  * Binary chars alphabet
  */
 export const BINARY_ALPHABET = [
