@@ -3,34 +3,40 @@ import Transition from '@/structures/Transition'
 /**
  * Turing machine state
  */
-class State extends Map<string, Transition> {
+class State {
+    /**
+     * Transitions store
+     */
+    private store: Map<string, Transition> = new Map()
+
     /**
      * Create state of turing machine
+     * @param name state name
      * @param transitions state transitions
      */
     public constructor(
         public readonly name: string,
         ...transitions: Transition[]
     ) {
-        super(transitions.map((transition) => {
-            return [transition.symbol, transition]
-        }))
+        transitions.map(this.add)
     }
 
     /**
-     * Set transition
-     * @param symbol symbol for transition
-     * @param transition transition to run
+     * Add transition
+     * @param transition transition to add
      * @returns updated state
      */
-    public set(symbol: string, transition: Transition): this {
-        if (symbol !== transition.symbol) {
-            throw new Error(`You cannot use different symbols. (${symbol} !== ${transition.symbol})`)
-        }
+    public add(transition: Transition) {
+        this.store.set(transition.symbol, transition)
+    }
 
-        super.set(symbol, transition)
-
-        return this
+    /**
+     * Get transition by symbol
+     * @param symbol transition symbol
+     * @returns transition
+     */
+    public get(symbol: string) {
+        return this.store.get(symbol)
     }
 }
 
