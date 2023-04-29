@@ -10,7 +10,7 @@ import Alphabet from '@structures/Alphabet'
 const handlersFactory = new TransitionHandlersFactory()
 const tapeFactory = new TapeFactory()
 
-const alphabet = new Alphabet.Factory().createBinaryAlphabet()
+const alphabet = Alphabet.Factory.createBinaryAlphabet()
 
 const state1 = new StateBuilder('Q1')
     .addTransition(
