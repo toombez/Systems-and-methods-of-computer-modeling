@@ -4,7 +4,7 @@ import { MoveTransitionDirection, TransitionHandler } from '@types'
 /**
  * Factory for transition handlers
  */
-class TransitionFactory {
+class TransitionHandlerFactory {
     /**
      * Move head left
      * @param machine machine to run transition
@@ -33,7 +33,7 @@ class TransitionFactory {
      * @returns move transition handler
      */
     public createMoveTransition(direction: MoveTransitionDirection): TransitionHandler {
-        return TransitionFactory.moveTransition.bind(this, direction)
+        return TransitionHandlerFactory.moveTransition.bind(this, direction)
     }
 
     /**
@@ -42,7 +42,7 @@ class TransitionFactory {
      * @returns write transition handler
      */
     public createWriteTransition(symbol: string) {
-        return TransitionFactory.writeTransition.bind(this, symbol)
+        return TransitionHandlerFactory.writeTransition.bind(this, symbol)
     }
 
     /**
@@ -50,7 +50,7 @@ class TransitionFactory {
      * @returns left move transition handler
      */
     public createLeftMoveTransition(): TransitionHandler {
-        return TransitionFactory.moveTransition.bind(this, 'LEFT')
+        return TransitionHandlerFactory.moveTransition.bind(this, 'LEFT')
     }
 
     /**
@@ -58,8 +58,8 @@ class TransitionFactory {
      * @returns right move transition handler
      */
     public createRightMoveTransition(): TransitionHandler {
-        return TransitionFactory.moveTransition.bind(this, 'RIGHT')
+        return TransitionHandlerFactory.moveTransition.bind(this, 'RIGHT')
     }
 }
 
-export default TransitionFactory
+export default TransitionHandlerFactory

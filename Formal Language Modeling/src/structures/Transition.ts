@@ -16,7 +16,7 @@ class Transition {
      * @param handlers handler for symbol
      */
     constructor(
-        public symbol?: string,
+        public readonly symbol: string,
         ...handlers: TransitionHandler[]
     ) {
         this.handlers = handlers
