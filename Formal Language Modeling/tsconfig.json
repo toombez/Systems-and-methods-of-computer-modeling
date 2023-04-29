@@ -11,6 +11,8 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
+      "@structures/*": ["structures/*"],
+      "@builders/*": ["builders/*"],
       "@types": ["types.ts"]
     }
   },
