@@ -13,6 +13,7 @@
       "@/*": ["*"],
       "@structures/*": ["structures/*"],
       "@builders/*": ["builders/*"],
+      "@mediators/*": ["mediators/*"],
       "@types": ["types.ts"]
     }
   },

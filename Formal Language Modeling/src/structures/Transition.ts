@@ -21,14 +21,6 @@ class Transition {
     ) {
         this.handlers = handlers
     }
-
-    /**
-     * Run transition handlers on machine
-     * @param machine machine which to perform transition
-     */
-    public run(machine: TuringMachine) {
-        this.handlers.forEach((handler) => handler(machine))
-    }
 }
 
 export default Transition
