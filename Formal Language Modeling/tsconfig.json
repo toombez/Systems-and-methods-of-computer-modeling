@@ -14,6 +14,7 @@
       "@structures/*": ["structures/*"],
       "@builders/*": ["builders/*"],
       "@mediators/*": ["mediators/*"],
+      "@factories/*": ["factories/*"],
       "@types": ["types.ts"]
     }
   },
