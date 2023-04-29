@@ -6,14 +6,21 @@ import TuringMachine from '@/structures/TuringMachine'
  */
 class Transition {
     /**
+     * Transition handlers
+     */
+    public handlers: TransitionHandler[]
+
+    /**
      * Create transition
      * @param symbol Symbol on which run transition
      * @param handlers handler for symbol
      */
     constructor(
-        public readonly symbol: string,
-        private handlers: TransitionHandler[],
-    ) {}
+        public symbol?: string,
+        ...handlers: TransitionHandler[]
+    ) {
+        this.handlers = handlers
+    }
 
     /**
      * Run transition handlers on machine
