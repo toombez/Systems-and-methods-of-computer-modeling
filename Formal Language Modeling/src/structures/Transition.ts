@@ -1,5 +1,5 @@
-import { TransitionHandler } from '@/types'
-import TuringMachine from '@/structures/TuringMachine'
+import { TransitionHandler } from '@types'
+import Queue from '@structures/Queue'
 
 /**
  * Turing machine state transition
@@ -8,7 +8,7 @@ class Transition {
     /**
      * Transition handlers
      */
-    public handlers: TransitionHandler[]
+    public queue: Queue<TransitionHandler> = new Queue()
 
     /**
      * Create transition
@@ -19,7 +19,7 @@ class Transition {
         public readonly symbol: string,
         ...handlers: TransitionHandler[]
     ) {
-        this.handlers = handlers
+        handlers.forEach((handler) => this.queue.enqueue(handler))
     }
 }
 

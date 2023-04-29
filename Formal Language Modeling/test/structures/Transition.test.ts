@@ -20,8 +20,8 @@ describe('Transition module', () => {
 
         const transition = new Transition('1', ...handlers)
 
-        transition.handlers.forEach((handler) => {
-            expect(handlers).toContain(handler)
-        })
+        while (!transition.queue.isEmpty) {
+            expect(handlers).toContain(transition.queue.dequeue())
+        }
     })
 })

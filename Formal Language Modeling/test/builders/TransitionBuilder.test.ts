@@ -17,7 +17,9 @@ describe('Transition builder module', () => {
             .addHandler(handlers[1])
             .build()
 
-        handlers.forEach((handler) => expect(transition.handlers).toContain(handler))
+        while (!transition.queue.isEmpty) {
+            expect(handlers).toContain(transition.queue.dequeue())
+        }
     })
 
     test('should build without errors', () => {

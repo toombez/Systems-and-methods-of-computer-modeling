@@ -4,7 +4,9 @@ import Mediator from '@mediators/Mediator'
 
 class TransitionMediator extends Mediator<Transition, TuringMachine> {
     public run(transition: Transition, machine: TuringMachine): void {
-        transition.handlers.forEach((handler) => handler(machine))
+        while(!transition.queue.isEmpty) {
+            transition.queue.dequeue()?.(machine)
+        }
     }
 }
 
