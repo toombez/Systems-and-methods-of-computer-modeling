@@ -6,23 +6,17 @@ import { TransitionHandler } from '@/types'
  * Builder for transitions
  */
 class TransitionBuilder extends Builder<Transition> {
-    protected element: Transition = new Transition()
+    protected element: Transition
 
     /**
      * Create builder for transition
      * @param symbol transition symbol
      */
-    public constructor() {
+    public constructor(symbol: string, ...handlers: TransitionHandler[]) {
         super()
-    }
+        this.element = new Transition(symbol)
 
-    /**
-     * Set symbol for transition
-     * @param symbol transition symbol
-     */
-    public setSymbol(symbol: string) {
-        this.element.symbol = symbol
-        return this
+        handlers.forEach(this.addHandler)
     }
 
     /**
@@ -33,12 +27,6 @@ class TransitionBuilder extends Builder<Transition> {
     public addHandler(handler: TransitionHandler): TransitionBuilder {
         this.element.handlers.push(handler)
         return this
-    }
-
-    protected validate(): void {
-        if (this.element.symbol === undefined) {
-            throw new Error('Transition must have symbol')
-        }
     }
 }
 
