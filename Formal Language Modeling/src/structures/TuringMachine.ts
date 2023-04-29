@@ -1,9 +1,12 @@
-import State from '@/structures/State'
-import Alphabet from '@/structures/Alphabet'
+import State from '@structures/State'
+import Alphabet from '@structures/Alphabet'
+import TransitionMediator from '@mediators/TransitionMediator'
 
 class TuringMachine {
     public head = 0
     public currentState: State
+
+    protected transitionMediator = new TransitionMediator()
 
     public constructor(
         public tape: string[],
@@ -21,7 +24,7 @@ class TuringMachine {
                 return
             }
 
-            transition.run(this)
+            this.transitionMediator.run(transition, this)
         })
 
         return this.tape
