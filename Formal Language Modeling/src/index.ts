@@ -11,7 +11,7 @@ const handlersFactory = new TransitionHandlersFactory()
 const alphabetFactory = new AlphabetFactory()
 const tapeFactory = new TapeFactory()
 
-const state = new StateBuilder('Q1')
+const state1 = new StateBuilder('Q1')
     .addTransition(
         new TransitionBuilder('1')
             .addHandler(handlersFactory.createWriteTransition('0'))
@@ -26,6 +26,26 @@ const state = new StateBuilder('Q1')
     )
     .addTransition(
         new TransitionBuilder('_')
+        .addHandler(handlersFactory.createChangeStateTransition('Q2'))
+        .addHandler(handlersFactory.createRightMoveTransition())
+        .build()
+    )
+    .build()
+const state2 = new StateBuilder('Q2')
+    .addTransition(
+        new TransitionBuilder('1')
+        .addHandler(handlersFactory.createWriteTransition('@'))
+        .addHandler(handlersFactory.createChangeStateTransition('Q1'))
+        .addHandler(handlersFactory.createRightMoveTransition())
+        .build()
+    )
+    .addTransition(
+        new TransitionBuilder('0')
+            .addHandler(handlersFactory.createRightMoveTransition())
+            .build()
+    )
+    .addTransition(
+        new TransitionBuilder('_')
         .addHandler(handlersFactory.createRightMoveTransition())
         .build()
     )
@@ -34,7 +54,7 @@ const state = new StateBuilder('Q1')
 const tm = new TuringMachine(
     tapeFactory.createFromString('01_00_110_101'),
     alphabetFactory.createBinaryAlphabet(),
-    [state]
+    [state1, state2]
 )
 
 console.log(tm.tape.join(''))

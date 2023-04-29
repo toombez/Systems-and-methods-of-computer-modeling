@@ -27,6 +27,10 @@ class TransitionHandlerFactory {
         tape[head] = symbol
     }
 
+    protected static changeStateTransition(name: string, machine: TuringMachine) {
+        machine.setCurrentState(name)
+    }
+
     /**
      * Create move transition handler
      * @param direction direction to move head
@@ -59,6 +63,10 @@ class TransitionHandlerFactory {
      */
     public createRightMoveTransition(): TransitionHandler {
         return TransitionHandlerFactory.moveTransition.bind(this, 'RIGHT')
+    }
+
+    public createChangeStateTransition(name: string): TransitionHandler {
+        return TransitionHandlerFactory.changeStateTransition.bind(this, name)
     }
 }
 

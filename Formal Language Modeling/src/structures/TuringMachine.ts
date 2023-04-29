@@ -29,6 +29,16 @@ class TuringMachine {
 
         return this.tape
     }
+
+    public setCurrentState(name: string) {
+        const newState = this.states.find((state) => state.name === name)
+
+        if (!newState) {
+            throw new Error(`Cannot find state ${name}`)
+        }
+
+        this.currentState = newState
+    }
 }
 
 export default TuringMachine
