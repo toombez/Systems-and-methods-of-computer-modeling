@@ -1,34 +1,44 @@
-import TuringMachine from '@/structures/TuringMachine'
-import TransitionFactory from '@/structures/TransitionFactory'
-import Transition from '@/structures/Transition'
-import State from '@/structures/State'
-import Alphabet from './structures/Alphabet'
-import Tape from './structures/Tape'
+import TuringMachine from '@structures/TuringMachine'
+import AlphabetFactory from '@factories/AlphabetFactory'
 
-const factory = new TransitionFactory()
+import TransitionHandlersFactory from '@factories/TransitionHandlerFactory'
+
+import StateBuilder from '@builders/StateBuilder'
+import TransitionBuilder from '@builders/TransitionBuilder'
+import TapeFactory from '@factories/TapeFactory'
+
+const handlersFactory = new TransitionHandlersFactory()
+const alphabetFactory = new AlphabetFactory()
+const tapeFactory = new TapeFactory()
+
+const state = new StateBuilder('Q1')
+    .addTransition(
+        new TransitionBuilder('1')
+            .addHandler(handlersFactory.createWriteTransition('0'))
+            .addHandler(handlersFactory.createRightMoveTransition())
+            .build()
+    )
+    .addTransition(
+        new TransitionBuilder('0')
+            .addHandler(handlersFactory.createWriteTransition('1'))
+            .addHandler(handlersFactory.createRightMoveTransition())
+            .build()
+    )
+    .addTransition(
+        new TransitionBuilder('_')
+        .addHandler(handlersFactory.createRightMoveTransition())
+        .build()
+    )
+    .build()
 
 const tm = new TuringMachine(
-    Tape.fromString('0101_1110_0101'),
-    new Alphabet(['0', '1', '_']),
-    [
-        new State(
-            'Q1',
-            new Transition('0', [
-                factory.createWriteTransition('1'),
-                factory.createRightMoveTransition()
-            ]),
-            new Transition('1', [
-                factory.createWriteTransition('0'),
-                factory.createRightMoveTransition()
-            ]),
-            new Transition('_', [
-                factory.createRightMoveTransition()
-        ]))
-    ]
+    tapeFactory.createFromString('01_00_110_101'),
+    alphabetFactory.createBinaryAlphabet(),
+    [state]
 )
 
 console.log(tm.tape.join(''))
 
-const result = tm.run()
+tm.run()
 
-console.log(result.join(''))
+console.log(tm.tape.join(''))
