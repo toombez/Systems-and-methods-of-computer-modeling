@@ -19,7 +19,9 @@ abstract class Builder<T = unknown> {
     /**
      * Validate element
      */
-    protected abstract validate(): void
+    protected validate(): void {
+        return
+    }
 }
 
 export default Builder
