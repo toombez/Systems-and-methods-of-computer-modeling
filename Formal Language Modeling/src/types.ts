@@ -4,7 +4,7 @@ import { BINARY_ALPHABET, ENGLISH_ALPHABET, RUSSIAN_ALPHABET } from './constants
 /**
  * Any transition handler
  */
-export type TransitionHandler = (machine: TuringMachine) => void
+export type TransitionHandler = (machine: TuringMachine, tape: string[]) => void
 
 /**
  * Move transition handler direction
@@ -31,4 +31,7 @@ export type EnglishAlphaber = Alphabet<typeof ENGLISH_ALPHABET>
  */
 export type RussianAlphabet = Alphabet<typeof RUSSIAN_ALPHABET>
 
-export type MachineState = 'RUNNING' | 'FINISH' | 'ERROR' | 'PAUSE'
+/**
+ * Turing machine status
+ */
+export type TuringMachineStatus = 'RUNNING' | 'FINISH' | 'ERROR' | 'PAUSE'

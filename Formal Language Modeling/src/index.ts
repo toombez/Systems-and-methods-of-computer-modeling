@@ -29,7 +29,7 @@ const states = [
         .addTransition(
             new TransitionBuilder('_')
                 .addHandler(handlersFactory.createRightMoveTransition())
-                .addHandler(handlersFactory.createChangeMachineStateTransition('FINISH'))
+                .addHandler(handlersFactory.createChangeStatusTransition('FINISH'))
                 .build()
         )
         .build(),
@@ -49,17 +49,16 @@ const states = [
         .addTransition(
             new TransitionBuilder('_')
                 .addHandler(handlersFactory.createRightMoveTransition())
-                .addHandler(handlersFactory.createChangeMachineStateTransition('FINISH'))
+                .addHandler(handlersFactory.createChangeStatusTransition('FINISH'))
                 .build()
         )
         .build()
 ]
 const tm = new TuringMachine(
-    tape,
     alphabet,
-    states
+    states,
 )
 
-console.log(tm.tape.join(''))
-tm.run()
-console.log(tm.tape.join(''))
+console.log(tape)
+const result = tm.run(tape)
+console.log(result)
