@@ -2,18 +2,30 @@ import { BINARY_ALPHABET, ENGLISH_ALPHABET, RUSSIAN_ALPHABET } from '@constants'
 import Alphabet from '@structures/Alphabet'
 
 abstract class AlphabetFactory {
+    /**
+     * Create binary alphabet
+     * @returns alphabet with binary and blank symbols
+     */
     public static createBinaryAlphabet(): Alphabet {
         return new Alphabet.Builder()
             .setSymbols(BINARY_ALPHABET)
             .build()
     }
 
+    /**
+     * Create english alphabet
+     * @returns alphabet with english and blank symbols
+     */
     public static createEnglishAlphabet(): Alphabet {
         return new Alphabet.Builder()
             .setSymbols(ENGLISH_ALPHABET)
             .build()
     }
 
+    /**
+     * Create russina alphabet
+     * @returns alphabet with russian and blank symbol
+     */
     public static createRussianAlphabet(): Alphabet {
         return new Alphabet.Builder()
             .setSymbols(RUSSIAN_ALPHABET)
