@@ -30,3 +30,5 @@ export type EnglishAlphaber = Alphabet<typeof ENGLISH_ALPHABET>
  * Russian alphabet union type
  */
 export type RussianAlphabet = Alphabet<typeof RUSSIAN_ALPHABET>
+
+export type MachineState = 'RUNNING' | 'FINISH' | 'ERROR' | 'PAUSE'

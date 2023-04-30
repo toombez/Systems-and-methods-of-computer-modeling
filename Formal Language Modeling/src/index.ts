@@ -10,56 +10,56 @@ import Alphabet from '@structures/Alphabet'
 const handlersFactory = new TransitionHandlersFactory()
 const tapeFactory = new TapeFactory()
 
+const tape = tapeFactory.createFromString('01_00_110_101')
 const alphabet = Alphabet.Factory.createBinaryAlphabet()
-
-const state1 = new StateBuilder('Q1')
-    .addTransition(
-        new TransitionBuilder('1')
-            .addHandler(handlersFactory.createWriteTransition('0'))
-            .addHandler(handlersFactory.createRightMoveTransition())
-            .build()
-    )
-    .addTransition(
-        new TransitionBuilder('0')
-            .addHandler(handlersFactory.createWriteTransition('1'))
-            .addHandler(handlersFactory.createRightMoveTransition())
-            .build()
-    )
-    .addTransition(
-        new TransitionBuilder('_')
-        .addHandler(handlersFactory.createChangeStateTransition('Q2'))
-        .addHandler(handlersFactory.createRightMoveTransition())
+const states = [
+    new StateBuilder('Q1')
+        .addTransition(
+            new TransitionBuilder('1')
+                .addHandler(handlersFactory.createWriteTransition('0'))
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .build()
+        )
+        .addTransition(
+            new TransitionBuilder('0')
+                .addHandler(handlersFactory.createWriteTransition('1'))
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .build()
+        )
+        .addTransition(
+            new TransitionBuilder('_')
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createChangeMachineStateTransition('FINISH'))
+                .build()
+        )
+        .build(),
+    new StateBuilder('Q2')
+        .addTransition(
+            new TransitionBuilder('1')
+                .addHandler(handlersFactory.createWriteTransition('0'))
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .build()
+        )
+        .addTransition(
+            new TransitionBuilder('0')
+                .addHandler(handlersFactory.createWriteTransition('1'))
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .build()
+        )
+        .addTransition(
+            new TransitionBuilder('_')
+                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createChangeMachineStateTransition('FINISH'))
+                .build()
+        )
         .build()
-    )
-    .build()
-const state2 = new StateBuilder('Q2')
-    .addTransition(
-        new TransitionBuilder('1')
-        .addHandler(handlersFactory.createWriteTransition('@'))
-        .addHandler(handlersFactory.createChangeStateTransition('Q1'))
-        .addHandler(handlersFactory.createRightMoveTransition())
-        .build()
-    )
-    .addTransition(
-        new TransitionBuilder('0')
-            .addHandler(handlersFactory.createRightMoveTransition())
-            .build()
-    )
-    .addTransition(
-        new TransitionBuilder('_')
-        .addHandler(handlersFactory.createRightMoveTransition())
-        .build()
-    )
-    .build()
-
+]
 const tm = new TuringMachine(
-    tapeFactory.createFromString('01_00_110_101'),
+    tape,
     alphabet,
-    [state1, state2]
+    states
 )
 
 console.log(tm.tape.join(''))
-
 tm.run()
-
 console.log(tm.tape.join(''))

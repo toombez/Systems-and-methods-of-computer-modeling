@@ -1,10 +1,13 @@
 import State from '@structures/State'
 import Alphabet from '@structures/Alphabet'
 import TransitionMediator from '@mediators/TransitionMediator'
+import { MachineState } from '@/types'
 
 class TuringMachine {
     public head = 0
     public currentState: State
+
+    public machineState: MachineState = 'PAUSE'
 
     protected transitionMediator = new TransitionMediator()
 
@@ -17,17 +20,18 @@ class TuringMachine {
     }
 
     public run() {
-        this.tape.forEach((symbol) => {
+        this.machineState = 'RUNNING'
+        while (this.machineState === 'RUNNING') {
+            const symbol = this.tape[this.head]
             const transition = this.currentState.get(symbol)
 
             if (!transition) {
+                this.machineState = 'FINISH'
                 return
             }
 
             this.transitionMediator.run(transition, this)
-        })
-
-        return this.tape
+        }
     }
 
     public setCurrentState(name: string) {

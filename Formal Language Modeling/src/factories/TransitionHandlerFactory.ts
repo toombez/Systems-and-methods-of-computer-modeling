@@ -1,5 +1,5 @@
 import TuringMachine from '@/structures/TuringMachine'
-import { MoveTransitionDirection, TransitionHandler } from '@types'
+import { MachineState, MoveTransitionDirection, TransitionHandler } from '@types'
 
 /**
  * Factory for transition handlers
@@ -27,8 +27,22 @@ class TransitionHandlerFactory {
         tape[head] = symbol
     }
 
+    /**
+     * Change machine state
+     * @param name state name to change
+     * @param machine machine to run transition
+     */
     protected static changeStateTransition(name: string, machine: TuringMachine) {
         machine.setCurrentState(name)
+    }
+
+    /**
+     * Change machine state on machine
+     * @param state state to set on machine
+     * @param machine machine to run transition
+     */
+    public static changeMachineStateTransition(state: MachineState, machine: TuringMachine) {
+        machine.machineState = state
     }
 
     /**
@@ -65,8 +79,22 @@ class TransitionHandlerFactory {
         return TransitionHandlerFactory.moveTransition.bind(this, 'RIGHT')
     }
 
+    /**
+     * Create change state transition handler
+     * @param name state to set on machine
+     * @returns change state transition handler
+     */
     public createChangeStateTransition(name: string): TransitionHandler {
         return TransitionHandlerFactory.changeStateTransition.bind(this, name)
+    }
+
+    /**
+     * Create change machine state transition handler
+     * @param state new machine state
+     * @returns change machine state transition handler
+     */
+    public createChangeMachineStateTransition(state: MachineState): TransitionHandler {
+        return TransitionHandlerFactory.changeMachineStateTransition.bind(this, state)
     }
 }
 
