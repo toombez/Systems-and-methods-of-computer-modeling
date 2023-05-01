@@ -1,32 +1,52 @@
-import Transition from '@/structures/Transition'
+import Transition from '@structures/Transition'
 import Builder from '@builders/Builder'
-import { TransitionHandler } from '@/types'
+import { TransitionHandler, Validator } from '@types'
+import TransitionValidator from '@structures/TransitionValidator'
 
 /**
  * Builder for transitions
  */
-class TransitionBuilder extends Builder<Transition> {
-    protected element: Transition
+class TransitionBuilder extends Builder<Transition, 'handler', 'symbol'> {
+    protected validator = new TransitionValidator()
+
+    protected symbol?: string
+    protected handlers: TransitionHandler[] = []
 
     /**
-     * Create builder for transition
-     * @param symbol transition symbol
+     * Add handler to `transition`
+     * @param handler `transition` handler
+     * @returns builder
      */
-    public constructor(symbol: string, ...handlers: TransitionHandler[]) {
-        super()
-        this.element = new Transition(symbol)
-
-        handlers.forEach(this.addHandler)
+    public addHandler(handler: TransitionHandler): TransitionBuilder {
+        this.handlers.push(handler)
+        return this
     }
 
     /**
-     * Add handler to transition
-     * @param handler handler to add to transition
-     * @returns builded transition
+     * Set symbol to `transition`
+     * @param symbol `transition` symbol
+     * @returns builder
      */
-    public addHandler(handler: TransitionHandler): TransitionBuilder {
-        this.element.handlers.push(handler)
+    public setSymbol(symbol: string): TransitionBuilder {
+        this.symbol = symbol
         return this
+    }
+
+    /**
+     * Build transition
+     * @returns transition
+     */
+    public build(): Transition {
+        this.validate()
+
+        return new Transition(this.symbol!, this.handlers)
+    }
+
+    /**
+     * Validate transition
+     */
+    protected validate(): void {
+        this.validator.validate(this.symbol)
     }
 }
 
