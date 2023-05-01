@@ -105,3 +105,10 @@ export type Builder<
         | BuilderMethodName<'set', TSetPart>
     ]: (...args: any[]) => Builder<TElement, TAddPart, TSetPart>
 }
+
+/**
+ * Validator
+ */
+export interface Validator {
+    validate(...args: any[]): void
+}
