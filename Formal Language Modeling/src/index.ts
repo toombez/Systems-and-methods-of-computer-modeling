@@ -17,19 +17,19 @@ const states = [
         .addTransition(
             new TransitionBuilder('1')
                 .addHandler(handlersFactory.createWriteTransition('0'))
-                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
                 .build()
         )
         .addTransition(
             new TransitionBuilder('0')
                 .addHandler(handlersFactory.createWriteTransition('1'))
-                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
                 .build()
         )
         .addTransition(
             new TransitionBuilder('_')
-                .addHandler(handlersFactory.createRightMoveTransition())
-                .addHandler(handlersFactory.createChangeStatusTransition('FINISH'))
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
+                .addHandler(handlersFactory.createSetStatusTransition('FINISH'))
                 .build()
         )
         .build(),
@@ -37,19 +37,19 @@ const states = [
         .addTransition(
             new TransitionBuilder('1')
                 .addHandler(handlersFactory.createWriteTransition('0'))
-                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
                 .build()
         )
         .addTransition(
             new TransitionBuilder('0')
                 .addHandler(handlersFactory.createWriteTransition('1'))
-                .addHandler(handlersFactory.createRightMoveTransition())
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
                 .build()
         )
         .addTransition(
             new TransitionBuilder('_')
-                .addHandler(handlersFactory.createRightMoveTransition())
-                .addHandler(handlersFactory.createChangeStatusTransition('FINISH'))
+                .addHandler(handlersFactory.createMoveTransition('RIGHT'))
+                .addHandler(handlersFactory.createSetStateTransition('FINISH'))
                 .build()
         )
         .build()

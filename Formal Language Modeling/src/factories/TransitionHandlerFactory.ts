@@ -1,20 +1,65 @@
+import { DEFAULT_BLANK_SYMBOL } from '@/constants'
 import TuringMachine from '@/structures/TuringMachine'
 import Tape from '@structures/Tape'
-import { TuringMachineStatus, MoveTransitionDirection, TransitionHandler } from '@types'
+import {
+    TuringMachineStatus,
+    MoveTransitionDirection,
+    TransitionHandler,
+    TransitionHandlerFactory as TransitionHandlerFactoryInterface,
+    Alphabet
+} from '@types'
 
 /**
  * Factory for transition handlers
+ *
+ * @param TAlphabet alphabet symbols union type exclude blank symbol
+ * @param TBlankSymbol blank symbol
+ * @param TState turing machine states union type
  */
-class TransitionHandlerFactory {
+class TransitionHandlerFactory<
+    TAlphabet extends Alphabet<string[]> = string,
+    TBlankSymbol extends string = typeof DEFAULT_BLANK_SYMBOL,
+    TState extends string = string
+> implements TransitionHandlerFactoryInterface<
+    TAlphabet,
+    TBlankSymbol,
+    TState
+> {
+    public createMoveTransition(
+        direction: MoveTransitionDirection,
+        count: number = 1,
+    ): TransitionHandler {
+        return TransitionHandlerFactory.moveTransition.bind(
+            this,
+            direction,
+            count,
+        )
+    }
+
+    public createWriteTransition(symbol: TAlphabet | TBlankSymbol) {
+        return TransitionHandlerFactory.writeTransition.bind(this, symbol)
+    }
+
+    public createSetStateTransition(state: TState): TransitionHandler {
+        return TransitionHandlerFactory.setStateTransition.bind(this, state)
+    }
+
+    public createSetStatusTransition(
+        status: TuringMachineStatus,
+    ): TransitionHandler {
+        return TransitionHandlerFactory.setStatusTransition.bind(this, status)
+    }
+
     /**
      * Move head left
      * @param machine machine to run transition
      */
     protected static moveTransition(
         direction: MoveTransitionDirection,
+        count: number,
         machine: TuringMachine,
     ) {
-        machine.head += direction === 'LEFT' ? -1 : 1
+        machine.head += direction === 'LEFT' ? -count : count
     }
 
     /**
@@ -37,7 +82,7 @@ class TransitionHandlerFactory {
      * @param name state name to change
      * @param machine machine to run transition
      */
-    protected static changeStateTransition(
+    protected static setStateTransition(
         name: string,
         machine: TuringMachine,
     ) {
@@ -49,63 +94,11 @@ class TransitionHandlerFactory {
      * @param state state to set on machine
      * @param machine machine to run transition
      */
-    public static changeStatusTransition(
+    protected static setStatusTransition(
         status: TuringMachineStatus,
         machine: TuringMachine,
     ) {
         machine.status = status
-    }
-
-    /**
-     * Create move transition handler
-     * @param direction direction to move head
-     * @returns move transition handler
-     */
-    public createMoveTransition(direction: MoveTransitionDirection): TransitionHandler {
-        return TransitionHandlerFactory.moveTransition.bind(this, direction)
-    }
-
-    /**
-     * Create write transition handler
-     * @param symbol symbol to write
-     * @returns write transition handler
-     */
-    public createWriteTransition(symbol: string) {
-        return TransitionHandlerFactory.writeTransition.bind(this, symbol)
-    }
-
-    /**
-     * Create left move transition handler
-     * @returns left move transition handler
-     */
-    public createLeftMoveTransition(): TransitionHandler {
-        return TransitionHandlerFactory.moveTransition.bind(this, 'LEFT')
-    }
-
-    /**
-     * Create right move transition handler
-     * @returns right move transition handler
-     */
-    public createRightMoveTransition(): TransitionHandler {
-        return TransitionHandlerFactory.moveTransition.bind(this, 'RIGHT')
-    }
-
-    /**
-     * Create change state transition handler
-     * @param name state to set on machine
-     * @returns change state transition handler
-     */
-    public createChangeStateTransition(name: string): TransitionHandler {
-        return TransitionHandlerFactory.changeStateTransition.bind(this, name)
-    }
-
-    /**
-     * Create change machine state transition handler
-     * @param state new machine state
-     * @returns change machine state transition handler
-     */
-    public createChangeStatusTransition(status: TuringMachineStatus): TransitionHandler {
-        return TransitionHandlerFactory.changeStatusTransition.bind(this, status)
     }
 }
 

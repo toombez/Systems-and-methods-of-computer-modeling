@@ -17,10 +17,11 @@ class TuringMachine {
     }
 
     public run(tape: Tape) {
+        const result = new Tape(...tape)
         this.status = 'RUNNING'
 
         while (this.status === 'RUNNING') {
-            const symbol = tape[this.head]
+            const symbol = result[this.head]
             const transition = this.currentState.get(symbol)
 
             if (!transition) {
@@ -28,10 +29,10 @@ class TuringMachine {
                 return
             }
 
-            transition.run(this, tape)
+            transition.run(this, result)
         }
 
-        return tape
+        return result
     }
 
     public setCurrentState(name: string) {
