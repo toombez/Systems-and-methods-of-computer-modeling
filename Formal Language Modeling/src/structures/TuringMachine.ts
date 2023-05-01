@@ -20,19 +20,23 @@ class TuringMachine {
         const result = new Tape(...tape)
         this.status = 'RUNNING'
 
-        while (this.status === 'RUNNING') {
+        while (this.status === 'RUNNING' && this.isInsideTape(tape)) {
             const symbol = result[this.head]
             const transition = this.currentState.get(symbol)
 
             if (!transition) {
                 this.status = 'ERROR'
-                return
+                return result
             }
 
             transition.run(this, result)
         }
 
         return result
+    }
+
+    protected isInsideTape(tape: Tape): boolean {
+        return this.head >= 0 && this.head < tape.length
     }
 
     public setCurrentState(name: string) {

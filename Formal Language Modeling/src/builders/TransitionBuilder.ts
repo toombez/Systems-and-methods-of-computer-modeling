@@ -25,7 +25,7 @@ class TransitionBuilder extends Builder<Transition> {
      * @returns builded transition
      */
     public addHandler(handler: TransitionHandler): TransitionBuilder {
-        this.element.queue.enqueue(handler)
+        this.element.handlers.push(handler)
         return this
     }
 }

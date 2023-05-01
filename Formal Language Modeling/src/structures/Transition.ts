@@ -10,7 +10,7 @@ class Transition {
     /**
      * Transition handlers
      */
-    public queue: Queue<TransitionHandler> = new Queue()
+    public handlers: TransitionHandler[]
 
     /**
      * Create transition
@@ -21,15 +21,13 @@ class Transition {
         public readonly symbol: string,
         ...handlers: TransitionHandler[]
     ) {
-        handlers.forEach((handler) => this.queue.enqueue(handler))
+        this.handlers = handlers
     }
 
     public run(machine: TuringMachine, tape: Tape) {
-        while (!this.queue.isEmpty) {
-            const handler = this.queue.dequeue()
-
-            handler?.(machine, tape)
-        }
+        this.handlers.forEach((handler) => {
+            handler(machine, tape)
+        })
     }
 }
 
