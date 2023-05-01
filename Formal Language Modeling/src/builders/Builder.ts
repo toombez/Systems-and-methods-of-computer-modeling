@@ -1,27 +1,17 @@
-/**
- * Base builder class
- */
-abstract class Builder<T = unknown> {
+abstract class Builder<
+    TElement,
+    TAddPart extends string,
+    TSetPart extends string
+> implements Builder<TElement, TAddPart, TSetPart> {
     /**
-     * Element to build
+     * Build element
      */
-    protected abstract element: T
-
-    /**
-     * Validate element and build it
-     * @returns builded element
-     */
-    public build() {
-        this.validate()
-        return this.element
-    }
+    public abstract build(): TElement
 
     /**
      * Validate element
      */
-    protected validate(): void {
-        return
-    }
+    protected validate(): void {}
 }
 
 export default Builder

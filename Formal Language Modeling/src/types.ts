@@ -80,3 +80,28 @@ export interface TransitionHandlerFactory<
      */
     createSetStatusTransition(status: TuringMachineStatus): TransitionHandler
 }
+
+/**
+ * Builder part method names
+ */
+type BuilderMethodName<
+    TMethod extends string = never,
+    TPart extends string = never
+> = `${Uncapitalize<TMethod>}${Capitalize<TPart>}`
+
+/**
+ * Builder
+ * @param TElement builder result
+ * @param TAddPart `add` methods
+ * @param TSetPart `set` methods
+ */
+export type Builder<
+    TElement = unknown,
+    TAddPart extends string = never,
+    TSetPart extends string = never
+> = {
+    [key in
+        BuilderMethodName<'add', TAddPart>
+        | BuilderMethodName<'set', TSetPart>
+    ]: (...args: any[]) => Builder<TElement, TAddPart, TSetPart>
+}
