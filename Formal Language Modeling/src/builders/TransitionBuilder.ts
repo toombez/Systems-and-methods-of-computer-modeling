@@ -1,12 +1,19 @@
 import Transition from '@structures/Transition'
-import Builder from '@builders/Builder'
-import { TransitionHandler, Validator } from '@types'
 import TransitionValidator from '@structures/TransitionValidator'
+import Builder from '@builders/Builder'
+
+import { TransitionHandler, Builder as BuilderType } from '@types'
+
+type TElement = Transition
+type TAddPart = 'handler'
+type TSetPart = 'symbol'
 
 /**
  * Builder for transitions
  */
-class TransitionBuilder extends Builder<Transition, 'handler', 'symbol'> {
+class TransitionBuilder
+extends Builder<TElement>
+implements BuilderType<TElement, TAddPart, TSetPart> {
     protected validator = new TransitionValidator()
 
     protected symbol?: string

@@ -1,10 +1,6 @@
 import { Validator } from '@types'
 
-abstract class Builder<
-    TElement,
-    TAddPart extends string,
-    TSetPart extends string
-> implements Builder<TElement, TAddPart, TSetPart> {
+abstract class Builder<TElement> {
     /**
      * Element validator
      */
