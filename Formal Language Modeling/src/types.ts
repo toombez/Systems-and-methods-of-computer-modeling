@@ -110,5 +110,9 @@ export type Builder<
  * Validator
  */
 export interface Validator {
+    /**
+     * Validate element
+     * @param args validation targets
+     */
     validate(...args: any[]): void
 }
