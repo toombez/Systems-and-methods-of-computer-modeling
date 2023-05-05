@@ -1,5 +1,6 @@
 import { BINARY_ALPHABET, ENGLISH_ALPHABET, RUSSIAN_ALPHABET } from '@constants'
 import Alphabet from '@structures/Alphabet'
+import AlphabetBuilder from '@builders/AlphabetBuilder'
 
 abstract class AlphabetFactory {
     /**
@@ -7,7 +8,7 @@ abstract class AlphabetFactory {
      * @returns alphabet with binary and blank symbols
      */
     public static createBinaryAlphabet(): Alphabet {
-        return new Alphabet.Builder()
+        return new AlphabetBuilder()
             .setSymbols(BINARY_ALPHABET)
             .build()
     }
@@ -17,7 +18,7 @@ abstract class AlphabetFactory {
      * @returns alphabet with english and blank symbols
      */
     public static createEnglishAlphabet(): Alphabet {
-        return new Alphabet.Builder()
+        return new AlphabetBuilder()
             .setSymbols(ENGLISH_ALPHABET)
             .build()
     }
@@ -27,7 +28,7 @@ abstract class AlphabetFactory {
      * @returns alphabet with russian and blank symbol
      */
     public static createRussianAlphabet(): Alphabet {
-        return new Alphabet.Builder()
+        return new AlphabetBuilder()
             .setSymbols(RUSSIAN_ALPHABET)
             .build()
     }

@@ -1,10 +1,10 @@
-import { Validator } from '@types'
+import { BuilderValidator } from '@types'
 
 abstract class Builder<TElement> {
     /**
      * Element validator
      */
-    protected abstract validator?: Validator
+    protected abstract validator?: BuilderValidator
 
     /**
      * Build element
