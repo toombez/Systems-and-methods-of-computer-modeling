@@ -1,5 +1,5 @@
 import Transition from '@structures/Transition'
-import TransitionValidator from '@structures/TransitionValidator'
+import TransitionValidator from '@validators/TransitionValidator'
 import Builder from '@builders/Builder'
 
 import { TransitionHandler, Builder as BuilderType } from '@types'

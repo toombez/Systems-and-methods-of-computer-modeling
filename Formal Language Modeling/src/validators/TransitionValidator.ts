@@ -1,6 +1,6 @@
-import { Validator } from '@types'
+import { BuilderValidator } from '@types'
 
-class TransitionValidator implements Validator {
+class TransitionValidator implements BuilderValidator {
     public validate(symbol?: string): void {
         if (symbol === undefined) {
             throw new Error('Symbol is required')
