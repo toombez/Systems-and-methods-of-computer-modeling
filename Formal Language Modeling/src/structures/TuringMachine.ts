@@ -22,14 +22,17 @@ class TuringMachine {
 
         while (this.status === 'RUNNING' && this.isInsideTape(tape)) {
             const symbol = result[this.head]
-            const transition = this.currentState.get(symbol)
+            const transition = this.currentState.transitions.get(symbol)
 
             if (!transition) {
                 this.status = 'ERROR'
                 return result
             }
 
-            transition.run(this, result)
+
+            transition.handlers.forEach((handler) => {
+                handler(this, result)
+            })
         }
 
         return result
@@ -40,7 +43,7 @@ class TuringMachine {
     }
 
     public setCurrentState(name: string) {
-        const newState = this.states.find((state) => state.name === name)
+        const newState = this.states.find((state) => state.token === name)
 
         if (!newState) {
             throw new Error(`Cannot find state ${name}`)

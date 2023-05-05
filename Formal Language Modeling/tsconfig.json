@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "baseUrl": "./src",
     "paths": {
+      "@validators/*": ["validators/*"],
       "@structures/*": ["structures/*"],
       "@builders/*": ["builders/*"],
       "@mediators/*": ["mediators/*"],

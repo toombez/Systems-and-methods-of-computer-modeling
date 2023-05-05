@@ -9,6 +9,7 @@ abstract class AlphabetFactory {
      */
     public static createBinaryAlphabet(): Alphabet {
         return new AlphabetBuilder()
+            .setBlankSymbol('_')
             .setSymbols(BINARY_ALPHABET)
             .build()
     }
@@ -19,6 +20,7 @@ abstract class AlphabetFactory {
      */
     public static createEnglishAlphabet(): Alphabet {
         return new AlphabetBuilder()
+            .setBlankSymbol('_')
             .setSymbols(ENGLISH_ALPHABET)
             .build()
     }
@@ -29,6 +31,7 @@ abstract class AlphabetFactory {
      */
     public static createRussianAlphabet(): Alphabet {
         return new AlphabetBuilder()
+            .setBlankSymbol('_')
             .setSymbols(RUSSIAN_ALPHABET)
             .build()
     }
