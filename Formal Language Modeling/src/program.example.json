@@ -1,0 +1,21 @@
+{
+  "$schema": "program.schema.json",
+  "alphabet": {
+    "blankSymbol": " ",
+    "symbols": ["0", "1"]
+  },
+  "states": [
+    {
+      "name": "Q1",
+      "operations": {
+        "0": ["LEFT", "RIGHT", "0", "END", "ERROR"],
+        "1": ["END"],
+        " ": []
+      }
+    }
+  ],
+  "tape": {
+    "headIndex": 0,
+    "initialSymbols": ["0", "1", " "]
+  }
+}

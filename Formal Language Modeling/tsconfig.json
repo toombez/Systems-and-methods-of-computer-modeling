@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@validators/*": ["validators/*"],
+      "@structures/*": ["structures/*"],
+      "@builders/*": ["builders/*"],
+      "@mediators/*": ["mediators/*"],
+      "@factories/*": ["factories/*"],
+      "@/*": ["*"],
+      "@types": ["types.ts"],
+      "@constants": ["constants.ts"]
+    }
+  },
+  "exclude": ["dist", "node_modules"]
+}

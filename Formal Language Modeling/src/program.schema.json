@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Program",
+  "description": "Program for turing machine",
+  "type": "object",
+  "properties": {
+    "tape": {
+      "description": "Tape properties",
+      "type": "object",
+      "properties": {
+        "initialSymbols": {
+          "description": "Tape initial symbols",
+          "type": ["array", "string"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "headIndex": {
+          "description": "Tape head inital index",
+          "type": "number"
+        }
+      },
+      "required": [
+        "initialSymbols",
+        "headIndex"
+      ]
+    },
+    "alphabet": {
+      "description": "Alphabet for turing machine",
+      "type": "object",
+      "properties": {
+        "blankSymbol": {
+          "description": "Blank symbol for alphabet",
+          "type": "string"
+        },
+        "symbols": {
+          "description": "Alphabet symbols array",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "blankSymbol",
+        "symbols"
+      ]
+    },
+    "states": {
+      "type": "array",
+      "description": "States for turing machine",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "State name",
+            "type": "string"
+          },
+          "operations": {
+            "description": "State operations",
+            "type": "object",
+            "properties": {
+              "*": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": []
+          }
+        },
+        "required": [
+          "name",
+          "operations"
+        ]
+      }
+    }
+  },
+  "required": [
+    "tape",
+    "alphabet",
+    "states"
+  ]
+}
